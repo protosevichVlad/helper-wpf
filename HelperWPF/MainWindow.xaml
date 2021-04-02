@@ -1,0 +1,78 @@
+﻿<Window x:Class="HelperWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HelperWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Height="600" Grid.Column="1">
+            <StackPanel VerticalAlignment="Stretch"> 
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Column="0">
+            <StackPanel.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="White" Offset="1" />
+                    <GradientStop Color="DodgerBlue" Offset="0" />
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <Label Content="Today 20.04.2021" HorizontalAlignment="Center" FontSize="18"></Label>
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="1.png"></Image>
+                <Label x:Name="CurrentTemperature" Grid.Column="1" VerticalAlignment="Center" Content="+40 C" HorizontalAlignment="Center" FontSize="40"></Label>
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel>
+                    <Label VerticalAlignment="Center" Content="21.04.2021" HorizontalAlignment="Center" FontSize="14"></Label>
+                    <Image Source="1.png"></Image>
+                    <Label VerticalAlignment="Center" Content="+40 C" HorizontalAlignment="Center" FontSize="14"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label VerticalAlignment="Center" Content="21.04.2021" HorizontalAlignment="Center" FontSize="14"></Label>
+                    <Image Source="1.png"></Image>
+                    <Label VerticalAlignment="Center" Content="+40 C" HorizontalAlignment="Center" FontSize="14"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label VerticalAlignment="Center" Content="21.04.2021" HorizontalAlignment="Center" FontSize="14"></Label>
+                    <Image Source="1.png"></Image>
+                    <Label VerticalAlignment="Center" Content="+40 C" HorizontalAlignment="Center" FontSize="14"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label VerticalAlignment="Center" Content="21.04.2021" HorizontalAlignment="Center" FontSize="14"></Label>
+                    <Image Source="http://openweathermap.org/img/wn/10d@2x.png"></Image>
+                    <Label VerticalAlignment="Center" Content="+40 C" HorizontalAlignment="Center" FontSize="14"></Label>
+                </StackPanel>
+                <StackPanel>
+                    <Label VerticalAlignment="Center" Content="21.04.2021" HorizontalAlignment="Center" FontSize="14"></Label>
+                    <Image Source="http://img.icons8.com/color/48/000000/cloud.png"></Image>
+                    <Label VerticalAlignment="Center" Content="+40 C" HorizontalAlignment="Center" FontSize="14"></Label>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
