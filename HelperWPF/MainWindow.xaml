@@ -5,17 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HelperWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800"
-        WindowStyle="None">
+        Title="MainWindow" Height="600" Width="900"
+        WindowStyle="SingleBorderWindow">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="250" />
         </Grid.ColumnDefinitions>
-        <ScrollViewer Height="600" Grid.Column="1">
+        <ScrollViewer Grid.Column="1">
             <StackPanel VerticalAlignment="Stretch"> 
                 <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
                 <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
@@ -37,16 +35,19 @@
                     <GradientStop Color="DodgerBlue" Offset="0" />
                 </LinearGradientBrush>
             </StackPanel.Background>
-            <Label Content="Today 20.04.2021" HorizontalAlignment="Center" FontSize="18"></Label>
+            <Label x:Name="CurrentDate" Content="Today 20.04.2021" HorizontalAlignment="Center" FontSize="18"></Label>
             <Grid HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="1.png"></Image>
-                <Label x:Name="CurrentTemperature" Grid.Column="1" VerticalAlignment="Center" Content="+40 C" HorizontalAlignment="Center" FontSize="40"></Label>
+                <Image x:Name="CurrentWeatherImage" Grid.Column="0" Source="http://openweathermap.org/img/wn/10d@4x.png"></Image>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Label x:Name="CurrentTemperature" Grid.Column="1" VerticalAlignment="Center" Content="+40 C" HorizontalAlignment="Center" FontSize="40"></Label>
+                    <Label x:Name="CurrentWeatherDescription" Grid.Column="1" VerticalAlignment="Center" Content="sad as das" HorizontalAlignment="Center" FontSize="16"></Label>
+                </StackPanel>
             </Grid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="Forecast">
                 <StackPanel>
                     <Label VerticalAlignment="Center" Content="21.04.2021" HorizontalAlignment="Center" FontSize="14"></Label>
                     <Image Source="1.png"></Image>
