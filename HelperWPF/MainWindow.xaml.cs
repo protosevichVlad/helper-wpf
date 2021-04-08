@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using HelperWPF.Repositories;
+using HelperWPF.Services;
 
 namespace HelperWPF
 {
@@ -22,11 +23,9 @@ namespace HelperWPF
 
         private async void SetData()
         {
-            var weatherRepository = new DailyWeatherRepository();
-            var weather = (await weatherRepository.GetAll()).ToList();
-
-            SetCurrentWeather(weather[0]);
-            SetForecastWeather(weather);
+            var weatherService = new WeatherService(new DailyWeatherRepository());
+            SetCurrentWeather(await weatherService.GetCurrentWeather());
+            SetForecastWeather(await weatherService.GetDailyWeather());
         }
 
         private void SetForecastWeather(List<Weather> weather)
