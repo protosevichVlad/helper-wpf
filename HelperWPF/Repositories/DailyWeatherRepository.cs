@@ -24,11 +24,17 @@ namespace HelperWPF.Repositories
         {
             List<Weather> weathers = new List<Weather>();
 
-            string GETUSER_URL = String.Format("http://api.openweathermap.org/data/2.5/onecall?lat=53.893009&lon=27.567444&cnt=7&units=metric&lang=ru&appid=518b92b3cbdf13f93c7da5e925eeddef");
-            using (var getUsers = new HttpClient())
+            string getWeatherUrl = "http://api.openweathermap.org/data/2.5/onecall?lat=53.893009&lon=27.567444&cnt=7&units=metric&lang=ru&appid=518b92b3cbdf13f93c7da5e925eeddef";
+            using (var getWeather = new HttpClient())
             {
-                var result = await getUsers.GetStringAsync(GETUSER_URL);
+                var result = await getWeather.GetStringAsync(getWeatherUrl);
                 dynamic json = JsonConvert.DeserializeObject(result);
+                if (json == null)
+                {
+                    throw new NotImplementedException();
+                }
+                
+                weathers.Add(new Weather(json.current.dt.ToString(), json.current.temp.ToString(), json.current.feels_like.ToString(), json.current.weather[0].description.ToString(), json.current.weather[0].icon.ToString()));
                 foreach (var values in json.daily)
                 {
                     Weather weather = new Weather(values.dt.ToString(), values.temp.day.ToString(), values.feels_like.day.ToString(), values.weather[0].description.ToString(), values.weather[0].icon.ToString() );
