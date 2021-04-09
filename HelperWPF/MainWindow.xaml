@@ -14,18 +14,7 @@
             <ColumnDefinition Width="250" />
         </Grid.ColumnDefinitions>
         <ScrollViewer Grid.Column="1">
-            <StackPanel VerticalAlignment="Stretch"> 
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
-                <Button MinHeight="60" BorderBrush="Black" Background="White" Content="Title"/>
+            <StackPanel VerticalAlignment="Stretch" x:Name="NewsPanel"> 
             </StackPanel>
         </ScrollViewer>
         <StackPanel Grid.Column="0">

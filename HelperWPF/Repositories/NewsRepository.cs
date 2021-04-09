@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
@@ -22,11 +23,9 @@ namespace HelperWPF.Repositories
             
             String URLString = "https://news.tut.by/rss/all.rss";
             var webClient = new WebClient();
-
+            webClient.Encoding = Encoding.UTF8;
             string result = webClient.DownloadString(URLString);
-
             XDocument document = XDocument.Parse(result);
-
             return (from descendant in document.Descendants("item")
                 select new News()
                 {

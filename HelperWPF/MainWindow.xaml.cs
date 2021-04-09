@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using HelperWPF.Repositories;
 using HelperWPF.Services;
@@ -24,6 +26,8 @@ namespace HelperWPF
         private async void SetData()
         {
             var weatherService = new WeatherService(new DailyWeatherRepository());
+            var newsService = new NewsService(new NewsRepository());
+            DisplayNews(await newsService.GetAllNews());
             SetCurrentWeather(await weatherService.GetCurrentWeather());
             SetForecastWeather(await weatherService.GetDailyWeather());
         }
@@ -68,6 +72,26 @@ namespace HelperWPF
             SetContentToLabel(CurrentTemperature, weather.Temp.ToString(CultureInfo.CurrentCulture));
             SetContentToLabel(CurrentWeatherDescription, weather.Description.ToString(CultureInfo.CurrentCulture));
             SetContentToImage(CurrentWeatherImage, weather.GetIconUrl(4));
+        }
+
+        private void DisplayNews(List<News> news)
+        {
+            for (int i = 0; i < news.Count; i++)
+            {
+                Button newsButton = new Button();
+                newsButton.MinHeight = 60;
+                newsButton.BorderBrush = new SolidColorBrush(Colors.Black);
+                newsButton.Background = new SolidColorBrush(Colors.White);
+
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = news[i].Title;
+                textBlock.TextWrapping = TextWrapping.Wrap;
+                textBlock.TextAlignment = TextAlignment.Center;
+                
+                newsButton.Content = textBlock;
+
+                NewsPanel.Children.Add(newsButton);
+            }
         }
     }
 }
