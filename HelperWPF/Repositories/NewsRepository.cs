@@ -31,7 +31,8 @@ namespace HelperWPF.Repositories
                 {
                     Description = descendant.Element("description")?.Value,
                     Title = descendant.Element("title")?.Value,
-                    PublishDate = DateTime.Parse(descendant.Element("pubDate")?.Value)
+                    PublishDate = DateTime.Parse(descendant.Element("pubDate")?.Value),
+                    Link = descendant.Element("link")?.Value,
                 }).ToList();
         }
     }
