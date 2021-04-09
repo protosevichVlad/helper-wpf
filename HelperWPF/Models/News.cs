@@ -4,17 +4,22 @@ namespace HelperWPF
 {
     public class News
     {
-        public readonly DateTime DateTime;
-        public readonly string Title;
-        public readonly string Description;
-        public readonly string Link;
+        public DateTime PublishDate;
+        public string Title;
+        public string Description;
+        public string Link;
+
+        public News()
+        {
+        }
 
         public News(DateTime dateTime, string title, string description, string link)
         {
-            DateTime = dateTime;
+            PublishDate = dateTime;
             Title = title;
             Description = description;
             Link = link;
         }
+        
     }
 }

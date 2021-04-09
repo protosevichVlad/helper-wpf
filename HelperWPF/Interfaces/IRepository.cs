@@ -8,6 +8,6 @@ namespace HelperWPF.Interfaces
     public interface IRepository<T>
     {
         Task<T> Get(int id);
-        Task<IEnumerable<Weather>> GetAll();
+        Task<IEnumerable<T>> GetAll();
     }
 }

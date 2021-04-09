@@ -14,7 +14,7 @@ namespace HelperWPF.Services
             _data = data;
         }
         
-        public async Task<List<Weather>> GetAllNews()
+        public async Task<List<News>> GetAllNews()
         {
             return (await _data.GetAll()).ToList();
         }
