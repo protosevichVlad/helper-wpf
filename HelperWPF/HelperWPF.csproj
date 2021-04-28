@@ -66,14 +66,17 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
-        <Compile Include="Interfaces\IRepository.cs" />
-        <Compile Include="Models\News.cs" />
-        <Compile Include="Models\Weather.cs" />
+        <Compile Include="Interfaces\INewsRepository.cs" />
+        <Compile Include="Interfaces\IWeatherRepository.cs" />
+        <Compile Include="Models\API\OpenWeatherMap.cs" />
+        <Compile Include="Models\Location.cs" />
         <Compile Include="Repositories\NewsRepository.cs" />
-        <Compile Include="Repositories\DailyWeatherRepository.cs" />
+        <Compile Include="Repositories\OpenWeatherMapRepository.cs" />
+        <Compile Include="Service.cs" />
         <Compile Include="Services\NewsService.cs" />
         <Compile Include="Services\WeatherService.cs" />
-        <Compile Include="ViewModel\CurrentWeatherViewModel.cs" />
+        <Compile Include="ViewModel\WeatherViewModel.cs" />
+        <Compile Include="ViewModel\NewsViewModel.cs" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -104,6 +107,9 @@
     <ItemGroup>
         <None Include="App.config" />
         <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Include="Models\RSS\NewsTutBy.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

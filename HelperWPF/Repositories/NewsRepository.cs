@@ -1,39 +1,39 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
+using System.Xml.Serialization;
 using HelperWPF.Interfaces;
+using HelperWPF.Models;
+using HelperWPF.Models.API;
+using HelperWPF.Models.Rss;
+using Newtonsoft.Json;
 
 namespace HelperWPF.Repositories
 {
-    public class NewsRepository : IRepository<News>
+    public class NewsRepository : INewsRepository
     {
-        public async Task<News> Get(int id)
+        private Rss _rss = null;
+        public async Task<Item[]> GetNews()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<IEnumerable<News>> GetAll()
-        {
-            List<News> news = new List<News>();
+            if (_rss == null)
+            {
+                await Request();     
+            }
             
-            String URLString = "https://news.tut.by/rss/all.rss";
-            var webClient = new WebClient();
-            webClient.Encoding = Encoding.UTF8;
-            string result = webClient.DownloadString(URLString);
-            XDocument document = XDocument.Parse(result);
-            return (from descendant in document.Descendants("item")
-                select new News()
-                {
-                    Description = descendant.Element("description")?.Value,
-                    Title = descendant.Element("title")?.Value,
-                    PublishDate = DateTime.Parse(descendant.Element("pubDate")?.Value),
-                    Link = descendant.Element("link")?.Value,
-                }).ToList();
+            return _rss.Channel.Item.ToArray();
+        }
+        
+        private async Task Request()
+        {
+            string newsUrl = "https://news.tut.by/rss/index.rss";
+
+            using (var news = new HttpClient())
+            {
+                var newsXmlStream = await news.GetStreamAsync(newsUrl);
+                XmlSerializer formatter = new XmlSerializer(typeof(Rss));
+                _rss = (Rss) formatter.Deserialize(newsXmlStream);
+            }
         }
     }
 }

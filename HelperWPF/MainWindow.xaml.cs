@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using HelperWPF.Models;
 using HelperWPF.Repositories;
 using HelperWPF.Services;
+using HelperWPF.ViewModel;
 
 namespace HelperWPF
 {
@@ -26,21 +27,21 @@ namespace HelperWPF
 
         private async void SetData()
         {
-            var weatherService = new WeatherService(new DailyWeatherRepository());
+            var weatherService = new WeatherService(new OpenWeatherMapRepository(new Location { Lat = 53.893, Lon = 27.5674}));
             var newsService = new NewsService(new NewsRepository());
             DisplayNews(await newsService.GetAllNews());
             SetCurrentWeather(await weatherService.GetCurrentWeather());
             SetForecastWeather(await weatherService.GetDailyWeather());
         }
 
-        private void SetForecastWeather(List<Weather> weather)
+        private void SetForecastWeather(List<WeatherViewModel> weather)
         {
             for (int i = 0; i < Forecast.Children.Count; i++)
             {
                 if (Forecast.Children[i] is StackPanel dayStackPanel)
                 {
                     SetContentToLabel(dayStackPanel.Children[0] , weather[i + 1].Date.ToString("dd/MM/yyyy (ddd)"));
-                    SetContentToImage(dayStackPanel.Children[1], weather[i + 1].GetIconUrl(2));
+                    SetContentToImage(dayStackPanel.Children[1], weather[i + 1].UrlIcon(2));
                     SetContentToLabel(dayStackPanel.Children[2] , $"{weather[i + 1].Temp.ToString(CultureInfo.CurrentCulture)}°C");
                 }
             }
@@ -67,21 +68,21 @@ namespace HelperWPF
             }
         }
 
-        private void SetCurrentWeather(Weather weather)
+        private void SetCurrentWeather(WeatherViewModel weather)
         {
             SetContentToLabel(CurrentDate, $"Сегодня {weather.Date:dddd d MMMM yyyy}");
             SetContentToLabel(CurrentTemperature, $"{weather.Temp.ToString(CultureInfo.CurrentCulture)}°C");
             SetContentToLabel(CurrentWeatherDescription, weather.Description.ToString(CultureInfo.CurrentCulture));
-            SetContentToImage(CurrentWeatherImage, weather.GetIconUrl(4));
+            SetContentToImage(CurrentWeatherImage, weather.UrlIcon(4));
         }
 
-        private void DisplayNews(List<News> news)
+        private void DisplayNews(List<NewsViewModel> news)
         {
             for (int i = 0; i < news.Count; i++)
             {
                 Button newsButton = new Button();
                 newsButton.MinHeight = 60;
-                newsButton.Tag = news[0].Link;
+                newsButton.Tag = news[i].Link;
                 newsButton.BorderBrush = new SolidColorBrush(Colors.Black);
                 newsButton.Background = new SolidColorBrush(Colors.White);
                 newsButton.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(OpenLink));
