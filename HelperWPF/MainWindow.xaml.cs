@@ -22,13 +22,15 @@ namespace HelperWPF
         {
             InitializeComponent();
 
-            SetData();
+            AppService appService = new AppService();
+            SetData(appService);
+            appService.SaveConfiguration();
         }
 
-        private async void SetData()
+        private async void SetData(AppService appService)
         {
-            var weatherService = new WeatherService(new OpenWeatherMapRepository(new Location { Lat = 53.893, Lon = 27.5674}));
-            var newsService = new NewsService(new NewsRepository());
+            var weatherService = new WeatherService(new OpenWeatherMapRepository(appService.GetLocation));
+            var newsService = new NewsService(new NewsRepository(appService.GetUrlNews));
             DisplayNews(await newsService.GetAllNews());
             SetCurrentWeather(await weatherService.GetCurrentWeather());
             SetForecastWeather(await weatherService.GetDailyWeather());
@@ -42,6 +44,7 @@ namespace HelperWPF
                 {
                     SetContentToLabel(dayStackPanel.Children[0] , weather[i + 1].Date.ToString("dd/MM/yyyy (ddd)"));
                     SetContentToImage(dayStackPanel.Children[1], weather[i + 1].UrlIcon(2));
+                    SetToolTip(dayStackPanel.Children[1], weather[i + 1].Description);
                     SetContentToLabel(dayStackPanel.Children[2] , $"{weather[i + 1].Temp.ToString(CultureInfo.CurrentCulture)}°C");
                 }
             }
@@ -103,6 +106,14 @@ namespace HelperWPF
             if (e.OriginalSource is Button button)
             {
                 System.Diagnostics.Process.Start(button.Tag.ToString());
+            }
+        }
+        
+        private void SetToolTip(object obj, string description)
+        {
+            if (obj is Image image)
+            {
+                ToolTipService.SetToolTip(image, description);
             }
         }
     }

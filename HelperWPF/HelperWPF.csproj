@@ -69,11 +69,14 @@
         <Compile Include="Interfaces\INewsRepository.cs" />
         <Compile Include="Interfaces\IWeatherRepository.cs" />
         <Compile Include="Models\API\OpenWeatherMap.cs" />
+        <Compile Include="Models\InfoAboutCurrentStateApp.cs" />
         <Compile Include="Models\Location.cs" />
+        <Compile Include="Models\NewsInfo.cs" />
         <Compile Include="Repositories\NewsRepository.cs" />
         <Compile Include="Repositories\OpenWeatherMapRepository.cs" />
         <Compile Include="Service.cs" />
         <Compile Include="Services\NewsService.cs" />
+        <Compile Include="Services\AppService.cs" />
         <Compile Include="Services\WeatherService.cs" />
         <Compile Include="ViewModel\WeatherViewModel.cs" />
         <Compile Include="ViewModel\NewsViewModel.cs" />
@@ -109,7 +112,7 @@
         <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <Compile Include="Models\RSS\NewsTutBy.cs" />
+      <Compile Include="Models\RSS\News.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

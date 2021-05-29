@@ -12,6 +12,8 @@ namespace HelperWPF.Repositories
 {
     public class OpenWeatherMapRepository : IWeatherRepository
     {
+        public string Url => $"http://api.openweathermap.org/data/2.5/onecall?lat={_location.Lat}&lon={_location.Lon}&cnt=7&units=metric&lang=ru&appid={Service.OpenWeatherMapKey}";
+        
         private readonly Location _location;
         private Weather Weather = null;
         
@@ -42,11 +44,9 @@ namespace HelperWPF.Repositories
 
         private async Task Request()
         {
-            string weatherUrl = $"http://api.openweathermap.org/data/2.5/onecall?lat={_location.Lat}&lon={_location.Lon}&cnt=7&units=metric&lang=ru&appid={Service.OpenWeatherMapKey}";
-
             using (var getWeather = new HttpClient())
             {
-                var result = await getWeather.GetStringAsync(weatherUrl);
+                var result = await getWeather.GetStringAsync(this.Url);
                 Weather = JsonConvert.DeserializeObject<Weather>(result);
             }
         }

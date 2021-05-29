@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelperWPF.Interfaces;
-using HelperWPF.Models.API;
 using HelperWPF.ViewModel;
 
 namespace HelperWPF.Services
