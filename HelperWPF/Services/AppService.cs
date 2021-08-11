@@ -1,6 +1,6 @@
 using System.IO;
 using System.Xml.Serialization;
-using HelperWPF.Models;
+using HelperWPF.ViewModel.Models;
 
 namespace HelperWPF.Services
 {
