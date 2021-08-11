@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelperWPF.Interfaces;
-using HelperWPF.ViewModel;
+using HelperWPF.ViewModel.Models;
 
 namespace HelperWPF.Services
 {
@@ -15,7 +15,7 @@ namespace HelperWPF.Services
         {
             _data = data;
         }
-        
+
         public async Task<List<NewsViewModel>> GetAllNews()
         {
             return (await _data.GetNews()).Select(item => new NewsViewModel()

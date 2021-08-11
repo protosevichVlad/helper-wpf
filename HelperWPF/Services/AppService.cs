@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Xml.Serialization;
 using HelperWPF.Models;
@@ -9,11 +8,11 @@ namespace HelperWPF.Services
     {
         private InfoAboutCurrentStateApp _info;
         private string _nameOfTheConfigurationFile = "conf.xml";
-        
-        public Location GetLocation => _info.Location;
 
-        public string GetUrlNews => _info.NewsInfo.Url;
-        
+        public Location Location => _info.Location;
+
+        public string UrlNews => _info.NewsInfo.Url;
+
         public AppService()
         {
             XmlSerializer formatter = new XmlSerializer(typeof(InfoAboutCurrentStateApp));
@@ -32,11 +31,11 @@ namespace HelperWPF.Services
                 this._info.NewsInfo = new NewsInfo { Url = "https://www.onliner.by/feed" };
             }
         }
-        
+
         public void SaveConfiguration()
         {
             XmlSerializer formatter = new XmlSerializer(typeof(InfoAboutCurrentStateApp));
- 
+
             using (FileStream fs = new FileStream(this._nameOfTheConfigurationFile, FileMode.OpenOrCreate))
             {
                 formatter.Serialize(fs, this._info);

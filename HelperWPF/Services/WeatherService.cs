@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelperWPF.Interfaces;
-using HelperWPF.ViewModel;
+using HelperWPF.ViewModel.Models;
 
 namespace HelperWPF.Services
 {
@@ -40,10 +40,10 @@ namespace HelperWPF.Services
                 Date = GetTimeFromUnixTime(item.Dt),
             }).ToList();
         }
-        
+
         private DateTime GetTimeFromUnixTime(long unixTime)
         {
-            return new DateTime(1970,1,1,0,0,0,0,System.DateTimeKind.Utc).AddSeconds(unixTime);
+            return new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc).AddSeconds(unixTime);
         }
     }
 }

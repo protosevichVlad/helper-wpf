@@ -1,0 +1,71 @@
+﻿<Window x:Class="HelperWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:HelperWPF.ViewModel.Windows"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="900"
+        WindowStyle="SingleBorderWindow"
+        x:Name="MyMainWindow">
+    <Window.DataContext>
+        <vm:MainWindowViewModel></vm:MainWindowViewModel>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="1">
+            <StackPanel VerticalAlignment="Stretch" x:Name="NewsPanel">
+                <ListBox ItemsSource="{Binding Path=News}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Button Width="220" Height="30" 
+                                    Command="{Binding Path=DataContext.OpenNewsCommand, ElementName=MyMainWindow}"
+                                    Content="{Binding Path=Title}"
+                                    CommandParameter="{Binding Path=Link}">
+                            </Button>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Column="0">
+            <StackPanel.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="White" Offset="1" />
+                    <GradientStop Color="DodgerBlue" Offset="0" />
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <Label x:Name="CurrentDate" Content="{Binding Path=Today}" HorizontalAlignment="Center" FontSize="18"></Label>
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image x:Name="CurrentWeatherImage" Grid.Column="0" Source="{Binding Path=CurrentWeather.UrlIcon4x}"></Image>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Label Grid.Column="1" VerticalAlignment="Center" Content="{Binding Path=CurrentWeather.TemperatureStr}" HorizontalAlignment="Center" FontSize="40"></Label>
+                    <Label Grid.Column="1" VerticalAlignment="Center" Content="{Binding Path=CurrentWeather.Description}" HorizontalAlignment="Center" FontSize="16"></Label>
+                </StackPanel>
+            </Grid>
+            <ListBox Background="Transparent" HorizontalAlignment="Center" ItemsSource="{Binding Path=ForecastWeather}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation='Horizontal'/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="Transparent">
+                            <Label VerticalAlignment="Center" Content="{Binding Path=DateStr}" HorizontalAlignment="Center" FontSize="14"></Label>
+                            <Image Source="{Binding Path=UrlIcon2x}"></Image>
+                            <Label VerticalAlignment="Center" Content="{Binding Path=TemperatureStr}" HorizontalAlignment="Center" FontSize="14"></Label>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>
